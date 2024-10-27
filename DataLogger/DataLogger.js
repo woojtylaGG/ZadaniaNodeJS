@@ -19,4 +19,12 @@ async function dataLogger(){
     lastName,
     age: Number(age)
   };
+
+  await fs.writeFile('userData.json', JSON.stringify(userData, null, 2));
+  console.log("Dane zapisane do pliku userData.json");
+
+  const data = await fs.readFile('userData.json', 'utf8');
+  console.log("Odczytane dane:", JSON.parse(data));
 }
+
+dataLogger();
