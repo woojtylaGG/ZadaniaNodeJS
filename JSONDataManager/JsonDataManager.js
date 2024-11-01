@@ -27,5 +27,14 @@ async function addNewObject(filePath){
         fs.writeFileSync(filePath, JSON.stringify(data, null,2));
         console.log('Data added');
     }
-
+    async function displayData(filePath) {
+        if (fs.existsSync(filePath)) {
+            const fileData = fs.readFileSync(filePath);
+            const data = JSON.parse(fileData);
+            console.log(data);
+        } else {
+            console.log('File does not exist.');
+        }
+    }
+    
 }
