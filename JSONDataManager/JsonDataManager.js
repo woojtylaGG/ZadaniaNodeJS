@@ -18,9 +18,8 @@ async function addNewObject(filePath){
         email
     };
     let data = [];
-    if(fs.existsSync(filePath)){
         if (fs.existsSync(filePath)){
-            const fileData = fs.readFileSync(filePath);
+        const fileData = fs.readFileSync(filePath);
         data = JSON.parse(fileData);
         }
         data.push(newObject);
@@ -36,5 +35,3 @@ async function addNewObject(filePath){
             console.log('File does not exist.');
         }
     }
-    
-}
