@@ -35,3 +35,20 @@ async function addNewObject(filePath){
             console.log('File does not exist.');
         }
     }
+    async function main() {
+        const action = await askQuestion('Do you want to add a new object or display data? (add/display): ');
+    
+        const filePath = await askQuestion('Enter the path to the JSON file: ');
+    
+        if (action === 'add') {
+            await addNewObject(filePath);
+        } else if (action === 'display') {
+            await displayData(filePath);
+        } else {
+            console.log('Invalid action.');
+        }
+    
+        rl.close();
+    }
+    
+    main();
