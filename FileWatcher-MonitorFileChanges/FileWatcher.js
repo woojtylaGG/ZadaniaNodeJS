@@ -16,6 +16,15 @@ class FileWatcher extends EventEmitter {
                         console.error('Error stating file:', err);
                         return;
                     }
+                    if (stats.isFile()) {
+                        if (eventType === 'rename' && !stats.isFile()) {
+                            this.emit('deleted', filename);
+                        } else if (eventType === 'rename' && stats.isFile()) {
+                            this.emit('added', filename);
+                        } else if (eventType === 'change') {
+                            this.emit('changed', filename);
+                        }
+                    }
                     
                 });
             }
