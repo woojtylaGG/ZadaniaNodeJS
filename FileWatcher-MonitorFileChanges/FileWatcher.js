@@ -8,4 +8,17 @@ class FileWatcher extends EventEmitter {
         this.logFile = logFile;
         this.watch();
     }
+    watch() {
+        fs.watch(this.directoryToWatch, (eventType, filename) => {
+            if (filename && filename !== this.logFile) {
+                fs.stat(`${this.directoryToWatch}/${filename}`, (err, stats) => {
+                    if (err) {
+                        console.error('Error stating file:', err);
+                        return;
+                    }
+                    
+                });
+            }
+        });
+    }
 }
