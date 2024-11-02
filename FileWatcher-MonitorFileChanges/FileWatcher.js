@@ -42,3 +42,19 @@ class FileWatcher extends EventEmitter {
     }
  
 }
+const directoryToWatch = 'D:\\RepoGithub\\ZadaniaNodeJS\\FileWatcher-MonitorFileChanges';
+const watcher = new FileWatcher(directoryToWatch);
+
+watcher.on('added', (filename) => {
+    console.log(`File added: ${filename}`);
+    watcher.logChange('added', filename);
+});
+
+watcher.on('changed', (filename) => {
+    console.log(`File changed: ${filename}`);
+    watcher.logChange('changed', filename);
+});
+
+watcher.on('deleted', (filename) => {
+    console.log(`File deleted: ${filename}`);
+});
