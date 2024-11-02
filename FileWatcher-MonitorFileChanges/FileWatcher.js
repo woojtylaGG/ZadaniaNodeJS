@@ -30,4 +30,15 @@ class FileWatcher extends EventEmitter {
             }
         });
     }
+    logChange(eventType, filename) {
+        if (filename === this.logFile) return;
+
+        const logMessage = `${new Date().toISOString()} - ${eventType}: ${filename}\n`;
+        fs.appendFile(this.logFile, logMessage, (err) => {
+            if (err) {
+                console.error('Error logging change:', err);
+            }
+        });
+    }
+ 
 }
