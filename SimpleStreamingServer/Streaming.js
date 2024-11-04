@@ -11,4 +11,17 @@ const server = http.createServer((req, res) => {
         res.end('Bad Request: No file specified');
         return;
     }
+    const filePath = `./${fileName}`;
+
+    fs.stat(filePath, (err, stats) => {
+        if (err || !stats.isFile()) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('File Not Found');
+            return;
+        }
+
+        res.writeHead(200, { 'Content-Type': 'application/octet-stream' });
+        const readStream = fs.createReadStream(filePath);
+        readStream.pipe(res);
+    });
 }); 
